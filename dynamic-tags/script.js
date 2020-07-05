@@ -18,6 +18,9 @@
 //
 // dtc2.loadTags();
 
+var languages = new DynamicTagController({});
+languages.loadTags();
+
 function getScrollPercent() {
   var h = document.documentElement,
     b = document.body,
@@ -30,7 +33,6 @@ function populateBackground() {
   for (let i = 0; i < 1000; i++) {
     let el = document.createElement("div");
     el.classList.add("bg-box");
-    console.log(el);
     el.style.width = Math.floor(Math.random() * 80) + 30 + "px";
     bg.appendChild(el);
   }

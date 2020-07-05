@@ -5,16 +5,16 @@
     <meta charset="utf-8">
     <title>dynamic-tags</title>
 
-    <link href="https://fonts.googleapis.com/css2?family=Goblin+One&family=Gotu&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Goblin+One&family=Gotu&family=DM+Mono:wght@300&display=swap" rel="stylesheet">
     <link href="reset.css" rel="stylesheet" />
     <link href="styles.css" rel="stylesheet" />
   </head>
 
   <body>
     <main>
-      <section id="top">
+      <div id="top">
         <a href="#intro">skip to content</a>
-      </section>
+      </div>
       <div class="background">
 
       </div>
@@ -32,10 +32,105 @@
         </p>
       </section>
       <section id="usage">
-
+        <h2>Usage</h2>
+        <h3>Basic setup</h3>
+        <p>
+          <span class="corny">dynamic-tags</span> is opinionated to some degree, and you use it by creating a <code>DynamicTagController()</code> object in your own JavaScript. The library expects you to have a filter element, a container element
+          that
+          contains several card elements, each containing some tag elements. Here's a brief example of what that might look like in a language filtering context:
+        </p>
+        <div class="example example-1">
+          <div class="filter">
+            <h4>Filter by property:</h4>
+          </div>
+          <div class="language-container">
+            <h4>Languages</h4>
+            <div class="container">
+              <div class="card">
+                <h4>English</h4>
+                <span class="tag">Italic</span>
+                <span class="tag">Germanic</span>
+                <span class="tag">West Germanic</span>
+                <span class="tag">Proto-Indo-European</span>
+              </div>
+              <div class="card">
+                <h4>Spanish</h4>
+                <span class="tag">Italic</span>
+                <span class="tag">Proto-Indo-European</span>
+              </div>
+              <div class="card">
+                <h4>Hindi</h4>
+                <span class="tag">Indo-Iranian</span>
+                <span class="tag">Indic</span>
+                <span class="tag">Proto-Indo-European</span>
+              </div>
+              <div class="card">
+                <h4>Persian</h4>
+                <span class="tag">Indo-Iranian</span>
+                <span class="tag">Iranian</span>
+                <span class="tag">Proto-Indo-European</span>
+              </div>
+              <div class="card">
+                <h4>Polish</h4>
+                <span class="tag">Slavic</span>
+                <span class="tag">Balto-Slavic</span>
+                <span class="tag">West Slavic</span>
+                <span class="tag">Proto-Indo-European</span>
+              </div>
+              <div class="card">
+                <h4>Bulgarian</h4>
+                <span class="tag">Slavic</span>
+                <span class="tag">Balto-Slavic</span>
+                <span class="tag">South Slavic</span>
+                <span class="tag">Proto-Indo-European</span>
+              </div>
+            </div>
+          </div>
+        </div>
+        <p>
+          This example took two lines of JavaScript:
+        </p>
+        <pre><code>
+      var languages = new DynamicTagController({});
+      languages.loadTags();
+        </code></pre>
+        <p>
+          In this case, the structuring of the DOM was more important to the library than any of the JavaScript. If you look at the DOM, you'll notice that each element had a class corresponding to its role: the filter had a <code>filter</code>
+          class, the container had a <code>container</code> class, each card had a <code>card</code> class, and each tag had a <code>tag</code> class. This is the default expectation, but you might need to use different classes for each element
+          (say, for example, to have multiple on the same page).
+        </p>
+        <p>
+          In this case, you can simply pass in a hash with the parameters you want to change. The available params right now are:
+        </p>
+        <div class="param-table">
+          <h4>Selectors</h4>
+          <div class="param-row">
+            <h5>"container"</h5>
+            <span>Determines the class of the container element, defaults to <code>container</code></span>
+          </div>
+          <div class="param-row">
+            <h5>"filter"</h5>
+            <span>Determines the class of the filter element, default <code>filter</code></span>
+          </div>
+          <div class="param-row">
+            <h5>"card"</h5>
+            <span>Determines the class of the card element, default <code>card</code></span>
+          </div>
+          <div class="param-row">
+            <h5>"tag"</h5>
+            <span>Determines the class of the tag element, default <code>tag</code></span>
+          </div>
+        </div>
       </section>
       <section id="contributing">
-
+        <h2>Contributing</h2>
+        <p>
+          We're always looking for new contributors to help with our project. You don't even need to know how to code! Take a look at our <a href="https://github.com/svasandani/dynamic-tags/issues">issues tracker</a> to see if there are any open
+          issues you can help with.
+        </p>
+        <p>
+          Alternatively, if you think of a feature you'd like to add, open an issue and make a pull request!
+        </p>
       </section>
     </main>
   </body>

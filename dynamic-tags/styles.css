@@ -9,10 +9,12 @@
   --green: #1d6f1d;
   --pastel-blue: #7dadef;
   --blue: #113d7f;
+  --gray1: #efefef;
+  --gray2: #cfcfcf;
 }
 
 html {
-  font-family: 'Gotu';
+  font-family: 'Gotu', sans-serif;
   scroll-behavior: smooth;
   font-size: 1.2em;
 }
@@ -20,6 +22,25 @@ html {
 h1 {
   font-size: 4em;
   margin-bottom: 1.2rem;
+}
+
+h2 {
+  font-size: 3em;
+  margin-bottom: 1em;
+}
+
+h3 {
+  font-size: 2em;
+  margin-bottom: 1em;
+}
+
+h4 {
+  font-size: 1.5em;
+  margin-bottom: 1em;
+}
+
+h5 {
+  font-weight: bold;
 }
 
 p {
@@ -30,7 +51,47 @@ p {
 
 a {
   text-decoration: none;
+  color: var(--blue);
+}
+
+p a:after {
+  content: '🔗';
+  color: inherit;
+}
+
+pre {
+  background: var(--gray2);
+  margin-bottom: 2em;
+}
+
+code {
+  font-family: 'DM Mono', monospace;
+  background: var(--gray2);
+  padding: 0 0.5em;
+  font-size: 1em;
+  line-height: 1.2em;
+}
+
+.corny {
+  font-family: 'Goblin One', serif;
+  font-weight: 400;
+  font-size: 0.88em;
+  display: inline-block;
+  padding: 0.5em;
+  border-radius: 0.2em;
+  background: var(--pastel-orange);
+  box-shadow: 0 0.1em var(--orange);
+  transition: 0.1s linear;
+  line-height: 1em;
+  vertical-align: middle;
   color: black;
+}
+
+.corny:hover {
+  cursor: pointer;
+  color: var(--blue);
+  box-shadow: 0 0.15em var(--orange);
+  transition: 0.1s linear;
 }
 
 header {
@@ -67,6 +128,8 @@ nav a:not(.corny):hover {
 section {
   margin: 0 15%;
   margin-top: 5vh;
+  padding-top: 150px;
+  min-height: 100vh;
 }
 
 .background {
@@ -93,38 +156,80 @@ section {
 }
 
 #intro {
-  padding-top: 150px;
-  height: calc(100vh - 200px);
+  min-height: calc(100vh - 200px);
   display: flex;
   flex-direction: column;
 }
 
-#usage {
-  height: 100vh;
+.example {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  margin-bottom: 2em;
+  grid-gap: 5%;
 }
 
-#contributing {
-  height: 100vh;
+.filter {
+  padding: 2rem;
 }
 
-.corny {
-  font-family: 'Goblin One';
-  font-weight: 400;
-  font-size: 0.88em;
+.filter .tag {
+  margin-right: 5px;
+}
+
+.language-container {
+  padding: 2rem;
+  background: var(--gray1);
+  border-radius: 15px;
+}
+
+.container {
+  display: flex;
+  flex-flow: column nowrap;
+}
+
+.card {
+  padding: 2rem;
+  background: var(--gray2);
+  border-radius: 15px;
+  margin-bottom: 15px;
+}
+
+.tag {
   display: inline-block;
-  padding: 0.5em;
-  border-radius: 0.2em;
-  background: var(--pastel-orange);
-  box-shadow: 0 0.1em var(--orange);
-  transition: 0.1s linear;
-  line-height: 1em;
+  margin-bottom: 0.5em;
+  padding: 0.6em;
+  border-radius: 5px;
+  background: var(--pastel-green);
+  box-shadow: 0 5px var(--green);
+  transition: 0.08s linear;
 }
 
-.corny:hover {
+.tag:hover {
   cursor: pointer;
-  color: var(--blue);
-  box-shadow: 0 0.15em var(--orange);
-  transition: 0.1s linear;
+  box-shadow: 0 7px var(--green);
+  transition: 0.08s linear;
+}
+
+.tag.active {
+  background: var(--green);
+  color: white;
+}
+
+.param-table {
+  width: 100%;
+  display: flex;
+  flex-flow: column nowrap;
+  border: 1px solid black;
+  padding: 2em;
+  background: var(--gray1);
+}
+
+.param-row {
+  display: grid;
+  grid-template-columns: 1fr 6fr;
+  align-items: center;
+  padding: 0.65em;
+  border-bottom: 1px solid black;
 }
 
 @media (max-width: 1000px) {
@@ -137,19 +242,49 @@ section {
     font-size: 2em;
   }
 
+  h4 {
+    font-size: 1.77em;
+  }
+
   p {
-    font-size: 2em;
+    line-height: 3em;
+  }
+
+  pre {
+    font-size: 1.44em;
+    overflow: scroll;
+    padding-right: 3em;
   }
 
   section {
     margin: 0 5%;
+    padding-top: 300px;
   }
 
-  #intro {
-    padding-top: 300px;
+  p .corny {
+    font-size: 1.2em;
+  }
+
+  .example {
+    display: grid;
+    grid-template-columns: 1fr;
+    margin-bottom: 2em;
+    grid-gap: 2rem;
+  }
+
+  .tag {
+    font-size: 1.6em;
+    padding: 0.66em;
   }
 
   .bg-box {
     height: 3em;
+  }
+
+  .param-row {
+    grid-template-columns: 1fr;
+    grid-gap: 1em;
+    padding-bottom: 2em;
+    margin-bottom: 2em;
   }
 }
