@@ -327,8 +327,9 @@ section {
     grid-gap: 2rem;
   }
 
-  .filter {
+  .filter, .input-filter {
     position: relative;
+    top: 0px;
   }
 
   .tag {
