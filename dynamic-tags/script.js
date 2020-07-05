@@ -21,6 +21,15 @@
 var languages = new DynamicTagController({});
 languages.loadTags();
 
+var inputFilter = new DynamicTagController({
+  container: "input-container",
+  card: "input-card",
+  tag: "input-tag",
+  filter: "input-filter",
+  filterSelectionMethod: "input"
+});
+inputFilter.loadTags();
+
 function getScrollPercent() {
   var h = document.documentElement,
     b = document.body,

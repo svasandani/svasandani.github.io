@@ -106,54 +106,132 @@
         <div class="param-table">
           <h4>Selectors</h4>
           <div class="param-row">
-            <h5>"container"</h5>
+            <h5>container</h5>
             <span>Determines the class of the container element; defaults to <code>container</code></span>
           </div>
           <div class="param-row">
-            <h5>"filter"</h5>
+            <h5>filter</h5>
             <span>Determines the class of the filter element; defaults to <code>filter</code></span>
           </div>
           <div class="param-row">
-            <h5>"card"</h5>
+            <h5>card</h5>
             <span>Determines the class of the card element; defaults to <code>card</code></span>
           </div>
           <div class="param-row">
-            <h5>"tag"</h5>
+            <h5>tag</h5>
             <span>Determines the class of the tag element; defaults to <code>tag</code></span>
           </div>
           <h4>Optional configuration</h4>
           <div class="param-row">
-            <h5>"useDataset"</h5>
+            <h5>useDataset</h5>
             <span>Use the data-X attribute instead of the innerHTML of the tag; defaults to <code>false</code></span>
           </div>
           <div class="param-row">
-            <h5>"useDataset"</h5>
-            <span>Determines whether to use the data-X attribute instead of the innerHTML of the tag; defaults to <code>false</code></span>
-          </div>
-          <div class="param-row">
-            <h5>"dataTag"</h5>
+            <h5>dataTag</h5>
             <span>Determines the X in data-X, if using dataset; defaults to <code>tag</code></span>
           </div>
           <div class="param-row">
-            <h5>"filterTagType"</h5>
+            <h5>filterSelectionMethod</h5>
+            <span>Determines whether the filter is a list of tags or an input element; defaults to <code>list</code></span>
+          </div>
+          <div class="param-row">
+            <h5>filterTagType</h5>
             <span>Determines the type of element to use as a tag in the filter element; defaults to <code>span</code></span>
           </div>
           <div class="param-row">
-            <h5>"activeTagClass"</h5>
+            <h5>activeTagClass</h5>
             <span>Determines the class to assign to active tags; defaults to <code>active</code></span>
+          </div>
+          <h4>Input behavior options</h4>
+          <div class="param-row">
+            <h5>filterInputClass</h5>
+            <span>Determines the class to assign to the auto-generated input element if filterSelectionMethod is set to <code>input</code>; defaults to <code>filter-input</code></span>
+          </div>
+          <div class="param-row">
+            <h5>filterInputPlaceholder</h5>
+            <span>Determines what placeholder text to use in the auto-generated input element if filterSelectionMethod is set to <code>input</code>; defaults to <code>filter-input</code></span>
+          </div>
+          <div class="param-row">
+            <h5>useAutocomplete</h5>
+            <span>Determines whether to show an autocomplete box under the filter input if filterSelectionMethod is set to <code>input</code>; defaults to <code>filter-input</code></span>
+          </div>
+          <div class="param-row">
+            <h5>autocompleteClass</h5>
+            <span>Determines the class to assign to the auto-generated autocomplete element if useAutocomplete is set to <code>true</code> and filterSelectionMethod is set to <code>input</code>; defaults to <code>filter-input</code></span>
           </div>
           <h4>No Result options</h4>
           <div class="param-row">
-            <h5>"noResultError"</h5>
+            <h5>noResultError</h5>
             <span>Determines whether to display an error when no result is found; defaults to <code>true</code></span>
           </div>
           <div class="param-row">
-            <h5>"noResultType"</h5>
+            <h5>noResultType</h5>
             <span>Determines the type of element to use when showing the no-result error; defaults to <code>h4</code></span>
           </div>
           <div class="param-row">
-            <h5>"noResultText"</h5>
+            <h5>noResultText</h5>
             <span>Determines the text shown in the no-result error; defaults to <code>Sorry, nothing matches your filters.</code></span>
+          </div>
+        </div>
+        <p>
+          This is an example of a tag system using the input filter selection method. The full list of params are:
+        </p>
+        <pre>
+          <code>
+      {
+        container: "input-container",
+        card: "input-card",
+        tag: "input-tag",
+        filter: "input-filter",
+        filterSelectionMethod: "input"
+      }</code>
+        </pre>
+        <div class="example example-2">
+          <div class="input-filter">
+            <h4>Filter by property:</h4>
+          </div>
+          <div class="language-container">
+            <h4>Languages</h4>
+            <div class="input-container">
+              <div class="input-card">
+                <h4>English</h4>
+                <span class="input-tag">Italic</span>
+                <span class="input-tag">Germanic</span>
+                <span class="input-tag">West Germanic</span>
+                <span class="input-tag">Proto-Indo-European</span>
+              </div>
+              <div class="input-card">
+                <h4>Spanish</h4>
+                <span class="input-tag">Italic</span>
+                <span class="input-tag">Proto-Indo-European</span>
+              </div>
+              <div class="input-card">
+                <h4>Hindi</h4>
+                <span class="input-tag">Indo-Iranian</span>
+                <span class="input-tag">Indic</span>
+                <span class="input-tag">Proto-Indo-European</span>
+              </div>
+              <div class="input-card">
+                <h4>Persian</h4>
+                <span class="input-tag">Indo-Iranian</span>
+                <span class="input-tag">Iranian</span>
+                <span class="input-tag">Proto-Indo-European</span>
+              </div>
+              <div class="input-card">
+                <h4>Polish</h4>
+                <span class="input-tag">Slavic</span>
+                <span class="input-tag">Balto-Slavic</span>
+                <span class="input-tag">West Slavic</span>
+                <span class="input-tag">Proto-Indo-European</span>
+              </div>
+              <div class="input-card">
+                <h4>Bulgarian</h4>
+                <span class="input-tag">Slavic</span>
+                <span class="input-tag">Balto-Slavic</span>
+                <span class="input-tag">South Slavic</span>
+                <span class="input-tag">Proto-Indo-European</span>
+              </div>
+            </div>
           </div>
         </div>
       </section>
@@ -169,7 +247,7 @@
       </section>
     </main>
   </body>
-  <script src="https://cdn.jsdelivr.net/gh/svasandani/dynamic-tags/js/dynamic-tags.js" type="application/javascript"></script>
+  <script src="https://cdn.jsdelivr.net/gh/svasandani/dynamic-tags/js/dynamic-tags.js"></script>
   <script src="script.js"></script>
 
 </html>

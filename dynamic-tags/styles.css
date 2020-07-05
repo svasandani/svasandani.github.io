@@ -11,6 +11,7 @@
   --blue: #113d7f;
   --gray1: #efefef;
   --gray2: #cfcfcf;
+  --gray3: #afafaf;
 }
 
 html {
@@ -175,7 +176,7 @@ section {
   align-items: flex-start;
 }
 
-.filter {
+.filter, .input-filter {
   z-index: 1;
   padding: 2rem;
   height: auto;
@@ -183,8 +184,32 @@ section {
   top: 100px;
 }
 
-.filter .tag {
+.filter .tag, .input-filter .input-tag {
   margin-right: 5px;
+}
+
+.filter-input {
+  display: inline-block;
+  padding: 0.75em;
+  background: var(--gray1);
+  width: 100%;
+  margin-right: 5px;
+  margin-bottom: 0.5em;
+  border-radius: 15px;
+}
+
+.filter-input:focus {
+  outline: none;
+  background: var(--gray2);
+}
+
+.autocomplete {
+  width: 100%;
+  min-height: 2em;
+  background: var(--gray3);
+  padding: 0.75em;
+  margin-bottom: 0.5em;
+  border-radius: 15px;
 }
 
 .language-container {
@@ -193,19 +218,19 @@ section {
   border-radius: 15px;
 }
 
-.container {
+.container, .input-container {
   display: flex;
   flex-flow: column nowrap;
 }
 
-.card {
+.card, .input-card {
   padding: 2rem;
   background: var(--gray2);
   border-radius: 15px;
   margin-bottom: 15px;
 }
 
-.tag {
+.tag, .input-tag {
   display: inline-block;
   margin-bottom: 0.5em;
   padding: 0.6em;
@@ -215,15 +240,28 @@ section {
   transition: 0.08s linear;
 }
 
-.tag:hover {
+.input-tag {
+  background: var(--pastel-orange);
+  box-shadow: 0 5px var(--orange);
+}
+
+.tag:hover, .input-tag:hover {
   cursor: pointer;
   box-shadow: 0 7px var(--green);
   transition: 0.08s linear;
 }
 
-.tag.active {
+.input-tag:hover {
+  box-shadow: 0 7px var(--orange);
+}
+
+.tag.active, .input-tag.active {
   background: var(--green);
   color: white;
+}
+
+.input-tag.active {
+  background: var(--orange);
 }
 
 .param-table {
@@ -234,6 +272,7 @@ section {
   padding: 0 2em;
   padding-bottom: 2em;
   background: var(--gray1);
+  margin-bottom: 2em;
 }
 
 .param-table h4 {
