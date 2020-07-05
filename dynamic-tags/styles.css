@@ -1,0 +1,155 @@
+* {
+  box-sizing: border-box;
+}
+
+:root {
+  --pastel-orange: #efad8d;
+  --orange: #8f4d1d;
+  --pastel-green: #8dcf8d;
+  --green: #1d6f1d;
+  --pastel-blue: #7dadef;
+  --blue: #113d7f;
+}
+
+html {
+  font-family: 'Gotu';
+  scroll-behavior: smooth;
+  font-size: 1.2em;
+}
+
+h1 {
+  font-size: 4em;
+  margin-bottom: 1.2rem;
+}
+
+p {
+  font-size: 1.2em;
+  line-height: 2em;
+  margin-bottom: 1.2em;
+}
+
+a {
+  text-decoration: none;
+  color: black;
+}
+
+header {
+  height: 100px;
+  width: 100%;
+  position: fixed;
+  top: 0;
+  background: var(--pastel-blue);
+}
+
+nav {
+  height: 100%;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  padding: 0 15%;
+}
+
+nav * {
+  margin-right: 5%;
+}
+
+nav a:not(.corny) {
+  border-bottom: 1px solid var(--pastel-blue);
+  transition: 0.1s linear;
+}
+
+nav a:not(.corny):hover {
+  cursor: pointer;
+  border-bottom: 1px solid var(--blue);
+  transition: 0.1s linear;
+}
+
+section {
+  margin: 0 15%;
+  margin-top: 5vh;
+}
+
+.background {
+  position: fixed;
+  width: 100vw;
+  height: 200vh;
+  top: 0;
+  left: 0;
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: space-evenly;
+  z-index: -100;
+}
+
+.bg-box {
+  height: 1.2em;
+  margin: 0.2em;
+  border-radius: 3px;
+  border: 2px solid #00000012;
+}
+
+#top a {
+  color: white;
+}
+
+#intro {
+  padding-top: 150px;
+  height: calc(100vh - 200px);
+  display: flex;
+  flex-direction: column;
+}
+
+#usage {
+  height: 100vh;
+}
+
+#contributing {
+  height: 100vh;
+}
+
+.corny {
+  font-family: 'Goblin One';
+  font-weight: 400;
+  font-size: 0.88em;
+  display: inline-block;
+  padding: 0.5em;
+  border-radius: 0.2em;
+  background: var(--pastel-orange);
+  box-shadow: 0 0.1em var(--orange);
+  transition: 0.1s linear;
+  line-height: 1em;
+}
+
+.corny:hover {
+  cursor: pointer;
+  color: var(--blue);
+  box-shadow: 0 0.15em var(--orange);
+  transition: 0.1s linear;
+}
+
+@media (max-width: 1000px) {
+  header {
+    height: 150px;
+  }
+
+  nav {
+    padding: 0 5%;
+    font-size: 2em;
+  }
+
+  p {
+    font-size: 2em;
+  }
+
+  section {
+    margin: 0 5%;
+  }
+
+  #intro {
+    padding-top: 300px;
+  }
+
+  .bg-box {
+    height: 3em;
+  }
+}
