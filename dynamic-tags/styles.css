@@ -54,7 +54,12 @@ a {
   color: var(--blue);
 }
 
+p a {
+  text-decoration: underline;
+}
+
 p a:after {
+  text-decoration: none;
   content: '🔗';
   color: inherit;
 }
@@ -100,6 +105,7 @@ header {
   position: fixed;
   top: 0;
   background: var(--pastel-blue);
+  z-index: 100;
 }
 
 nav {
@@ -166,10 +172,15 @@ section {
   grid-template-columns: 1fr 1fr;
   margin-bottom: 2em;
   grid-gap: 5%;
+  align-items: flex-start;
 }
 
 .filter {
+  z-index: 1;
   padding: 2rem;
+  height: auto;
+  position: sticky;
+  top: 100px;
 }
 
 .filter .tag {
@@ -220,13 +231,18 @@ section {
   display: flex;
   flex-flow: column nowrap;
   border: 1px solid black;
-  padding: 2em;
+  padding: 0 2em;
+  padding-bottom: 2em;
   background: var(--gray1);
+}
+
+.param-table h4 {
+  margin-top: 2rem;
 }
 
 .param-row {
   display: grid;
-  grid-template-columns: 1fr 6fr;
+  grid-template-columns: 2fr 6fr;
   align-items: center;
   padding: 0.65em;
   border-bottom: 1px solid black;
@@ -272,6 +288,10 @@ section {
     grid-gap: 2rem;
   }
 
+  .filter {
+    position: relative;
+  }
+
   .tag {
     font-size: 1.6em;
     padding: 0.66em;
@@ -279,6 +299,14 @@ section {
 
   .bg-box {
     height: 3em;
+  }
+
+  .param-table {
+    padding: 3em;
+  }
+
+  .param-table h4 {
+    font-size: 3em;
   }
 
   .param-row {

@@ -34,6 +34,7 @@
       <section id="usage">
         <h2>Usage</h2>
         <h3>Basic setup</h3>
+        <!--need to show that tags are dynamically generated-->
         <p>
           <span class="corny">dynamic-tags</span> is opinionated to some degree, and you use it by creating a <code>DynamicTagController()</code> object in your own JavaScript. The library expects you to have a filter element, a container element
           that
@@ -106,19 +107,53 @@
           <h4>Selectors</h4>
           <div class="param-row">
             <h5>"container"</h5>
-            <span>Determines the class of the container element, defaults to <code>container</code></span>
+            <span>Determines the class of the container element; defaults to <code>container</code></span>
           </div>
           <div class="param-row">
             <h5>"filter"</h5>
-            <span>Determines the class of the filter element, default <code>filter</code></span>
+            <span>Determines the class of the filter element; defaults to <code>filter</code></span>
           </div>
           <div class="param-row">
             <h5>"card"</h5>
-            <span>Determines the class of the card element, default <code>card</code></span>
+            <span>Determines the class of the card element; defaults to <code>card</code></span>
           </div>
           <div class="param-row">
             <h5>"tag"</h5>
-            <span>Determines the class of the tag element, default <code>tag</code></span>
+            <span>Determines the class of the tag element; defaults to <code>tag</code></span>
+          </div>
+          <h4>Optional configuration</h4>
+          <div class="param-row">
+            <h5>"useDataset"</h5>
+            <span>Use the data-X attribute instead of the innerHTML of the tag; defaults to <code>false</code></span>
+          </div>
+          <div class="param-row">
+            <h5>"useDataset"</h5>
+            <span>Determines whether to use the data-X attribute instead of the innerHTML of the tag; defaults to <code>false</code></span>
+          </div>
+          <div class="param-row">
+            <h5>"dataTag"</h5>
+            <span>Determines the X in data-X, if using dataset; defaults to <code>tag</code></span>
+          </div>
+          <div class="param-row">
+            <h5>"filterTagType"</h5>
+            <span>Determines the type of element to use as a tag in the filter element; defaults to <code>span</code></span>
+          </div>
+          <div class="param-row">
+            <h5>"activeTagClass"</h5>
+            <span>Determines the class to assign to active tags; defaults to <code>active</code></span>
+          </div>
+          <h4>No Result options</h4>
+          <div class="param-row">
+            <h5>"noResultError"</h5>
+            <span>Determines whether to display an error when no result is found; defaults to <code>true</code></span>
+          </div>
+          <div class="param-row">
+            <h5>"noResultType"</h5>
+            <span>Determines the type of element to use when showing the no-result error; defaults to <code>h4</code></span>
+          </div>
+          <div class="param-row">
+            <h5>"noResultText"</h5>
+            <span>Determines the text shown in the no-result error; defaults to <code>Sorry, nothing matches your filters.</code></span>
           </div>
         </div>
       </section>

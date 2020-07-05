@@ -44,5 +44,4 @@ document.addEventListener('DOMContentLoaded', populateBackground);
 
 window.addEventListener('scroll', function() {
   bg.style.transform = "translateY(-" + getScrollPercent() * 0.3 + "vh)";
-  console.log(bg.style.transform);
 });
