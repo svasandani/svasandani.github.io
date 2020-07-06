@@ -34,62 +34,63 @@
       <section id="usage">
         <h2>Usage</h2>
         <h3>Basic setup</h3>
-        <!--need to show that tags are dynamically generated-->
         <p>
-          <span class="corny">dynamic-tags</span> is opinionated to some degree, and you use it by creating a <code>DynamicTagController()</code> object in your own JavaScript. The library expects you to have a filter element, a container element
-          that
-          contains several card elements, each containing some tag elements. Here's a brief example of what that might look like in a language filtering context:
+          <span class="corny">dynamic-tags</span> is designed to fit directly into your predefined HTML without much fuss. It expects that your DOM has a container for all your cards, and that all your cards have been loaded. It also expects that
+          the tags for each card belongs to that card in the DOM. For example, you might have a list of languages that each have a number of properties.
+        </p>
+        <p>
+          You can simply drop the library into your website by writing <code>&lt;script src="js/dynamic-tags.js"&gt;&lt;/script&gt;</code> somewhere after your <code>body</code> element. Then, in your JavaScript, create a <code>DynamicTagController()</code>
+          object, and
+          finally, call the <code>loadTags()</code> method of that object. Here's a brief example of what the result might look like in the language filtering example mentioned above:
         </p>
         <div class="example example-1">
           <div class="filter">
             <h4>Filter by property:</h4>
           </div>
-          <div class="language-container">
+          <div class="container">
             <h4>Languages</h4>
-            <div class="container">
-              <div class="card">
-                <h4>English</h4>
-                <span class="tag">Italic</span>
-                <span class="tag">Germanic</span>
-                <span class="tag">West Germanic</span>
-                <span class="tag">Proto-Indo-European</span>
-              </div>
-              <div class="card">
-                <h4>Spanish</h4>
-                <span class="tag">Italic</span>
-                <span class="tag">Proto-Indo-European</span>
-              </div>
-              <div class="card">
-                <h4>Hindi</h4>
-                <span class="tag">Indo-Iranian</span>
-                <span class="tag">Indic</span>
-                <span class="tag">Proto-Indo-European</span>
-              </div>
-              <div class="card">
-                <h4>Persian</h4>
-                <span class="tag">Indo-Iranian</span>
-                <span class="tag">Iranian</span>
-                <span class="tag">Proto-Indo-European</span>
-              </div>
-              <div class="card">
-                <h4>Polish</h4>
-                <span class="tag">Slavic</span>
-                <span class="tag">Balto-Slavic</span>
-                <span class="tag">West Slavic</span>
-                <span class="tag">Proto-Indo-European</span>
-              </div>
-              <div class="card">
-                <h4>Bulgarian</h4>
-                <span class="tag">Slavic</span>
-                <span class="tag">Balto-Slavic</span>
-                <span class="tag">South Slavic</span>
-                <span class="tag">Proto-Indo-European</span>
-              </div>
+            <div class="card">
+              <h4>English</h4>
+              <span class="tag">Italic</span>
+              <span class="tag">Germanic</span>
+              <span class="tag">West Germanic</span>
+              <span class="tag">Proto-Indo-European</span>
+            </div>
+            <div class="card">
+              <h4>Spanish</h4>
+              <span class="tag">Italic</span>
+              <span class="tag">Proto-Indo-European</span>
+            </div>
+            <div class="card">
+              <h4>Hindi</h4>
+              <span class="tag">Indo-Iranian</span>
+              <span class="tag">Indic</span>
+              <span class="tag">Proto-Indo-European</span>
+            </div>
+            <div class="card">
+              <h4>Persian</h4>
+              <span class="tag">Indo-Iranian</span>
+              <span class="tag">Iranian</span>
+              <span class="tag">Proto-Indo-European</span>
+            </div>
+            <div class="card">
+              <h4>Polish</h4>
+              <span class="tag">Slavic</span>
+              <span class="tag">Balto-Slavic</span>
+              <span class="tag">West Slavic</span>
+              <span class="tag">Proto-Indo-European</span>
+            </div>
+            <div class="card">
+              <h4>Bulgarian</h4>
+              <span class="tag">Slavic</span>
+              <span class="tag">Balto-Slavic</span>
+              <span class="tag">South Slavic</span>
+              <span class="tag">Proto-Indo-European</span>
             </div>
           </div>
         </div>
         <p>
-          This example took two lines of JavaScript:
+          Note that the styling isn't included as part of the library — yet. Style notwithstanding, this example took only two lines of JavaScript:
         </p>
         <pre><code>
       var languages = new DynamicTagController({});
@@ -120,6 +121,10 @@
           <div class="param-row">
             <h5>tag</h5>
             <span>Determines the class of the tag element; defaults to <code>tag</code></span>
+          </div>
+          <div class="param-row">
+            <h5>selectorExclusivity</h5>
+            <span>Determines whether to query the intersection or union of selectors passed in; defaults to <code>union</code></span>
           </div>
           <h4>Optional configuration</h4>
           <div class="param-row">
@@ -174,64 +179,71 @@
           </div>
         </div>
         <p>
-          This is an example of a tag system using the input filter selection method. The full list of params are:
+          As an example of what can be done using this system, here is an entirely different use-case, using these parameters:
         </p>
         <pre>
           <code>
       {
-        container: "input-container",
-        card: "input-card",
-        tag: "input-tag",
-        filter: "input-filter",
-        filterSelectionMethod: "input"
-      }</code>
-        </pre>
-        <div class="example example-2">
-          <div class="input-filter">
-            <h4>Filter by property:</h4>
+        container: "blog-container",
+        card: "blog-post",
+        tag: "blog-tag",
+        filter: "blog-filter",
+        filterSelectionMethod: "input",
+        filterInputClass: "blog-filter-input",
+        filterInputPlaceholder: "Search for tags here...",
+        autocompleteClass: "blog-autocomplete",
+        activeTagClass: "viewing"
+      }
+    </code></pre>
+        <div class="blog-container">
+          <div class="blog-filter">
+
           </div>
-          <div class="language-container">
-            <h4>Languages</h4>
-            <div class="input-container">
-              <div class="input-card">
-                <h4>English</h4>
-                <span class="input-tag">Italic</span>
-                <span class="input-tag">Germanic</span>
-                <span class="input-tag">West Germanic</span>
-                <span class="input-tag">Proto-Indo-European</span>
-              </div>
-              <div class="input-card">
-                <h4>Spanish</h4>
-                <span class="input-tag">Italic</span>
-                <span class="input-tag">Proto-Indo-European</span>
-              </div>
-              <div class="input-card">
-                <h4>Hindi</h4>
-                <span class="input-tag">Indo-Iranian</span>
-                <span class="input-tag">Indic</span>
-                <span class="input-tag">Proto-Indo-European</span>
-              </div>
-              <div class="input-card">
-                <h4>Persian</h4>
-                <span class="input-tag">Indo-Iranian</span>
-                <span class="input-tag">Iranian</span>
-                <span class="input-tag">Proto-Indo-European</span>
-              </div>
-              <div class="input-card">
-                <h4>Polish</h4>
-                <span class="input-tag">Slavic</span>
-                <span class="input-tag">Balto-Slavic</span>
-                <span class="input-tag">West Slavic</span>
-                <span class="input-tag">Proto-Indo-European</span>
-              </div>
-              <div class="input-card">
-                <h4>Bulgarian</h4>
-                <span class="input-tag">Slavic</span>
-                <span class="input-tag">Balto-Slavic</span>
-                <span class="input-tag">South Slavic</span>
-                <span class="input-tag">Proto-Indo-European</span>
-              </div>
-            </div>
+          <div class="blog-post">
+            <h4>Making a super fluffy pancake ... without eggs!</h4>
+            <p>
+              Ever wanted to make fluffy pancakes but <span class="blog-tag">dairy-free</span>? This is the <span class="blog-tag">recipe</span> for you! Read on to find out how to WOW your family for Sunday <span class="blog-tag">brunch</span>.
+            </p>
+          </div>
+          <div class="blog-post">
+            <h4>Top 10 best books to read if you loved Ender's Game</h4>
+            <p>
+              Ender's Game is a <span class="blog-tag">sci-fi</span> classic. Unfortunately, it's old as hell. Here are the authors that are taking Orson Scott Card's legacy to the next level!
+            </p>
+          </div>
+          <div class="blog-post">
+            <h4>Book Review: Skyward</h4>
+            <p>
+              Brandon Sanderson is a <span class="blog-tag">fantasy</span> genius. In his exploratory foray into <span class="blog-tag">sci-fi</span> writing, he shows his true mastery of tension, character development, and worldbuidling. Our <span
+                class="blog-tag">book review</span> is spoiler-free!
+            </p>
+          </div>
+          <div class="blog-post">
+            <h4>Pizza, without the cheese?</h4>
+            <p>
+              Ask almost anyone, and the piping hot cheese on a pizza is the best part. We're here to show you that <span class="blog-tag">pizza</span> can still be amazing while being <span class="blog-tag">dairy-free</span>. Check out this
+              ten-minute <span class="blog-tag">recipe</span> that will shake up your <span class="blog-tag">weeknight</span>.
+            </p>
+          </div>
+          <div class="blog-post">
+            <h4>Book Review: Aurora Rising</h4>
+            <p>
+              Amie Kaufman is a New York Times bestselling <span class="blog-tag">sci-fi</span> author - and with good reason. Aurora Rising is her second collaboration with Jay Kristoff, and as usual, it is a delight to watch these two masters at
+              work. Our <span class="blog-tag">book review</span> goes into more depth about the world behind Aurora Rising.
+            </p>
+          </div>
+          <div class="blog-post">
+            <h4>Top 5 fantasy authors to look out for in 2021</h4>
+            <p>
+              Get ready to immerse yourself in the worlds created by these outstanding <span class="blog-tag">fantasy</span> authors. These books will be pageturners - without a doubt.
+            </p>
+          </div>
+          <div class="blog-post">
+            <h4>Book Review: Shatter Me</h4>
+            <p>
+              Treading the line between <span class="blog-tag">sci-fi</span>, <span class="blog-tag">fantasy</span>, and <span class="blog-tag">dystopia</span>, Tahereh Mafi proves to be no tightrope walker. This book is an attempt at making
+              something new of an overstuffed genre. Read our <span class="blog-tag">book review</span> to see how it went. Spoiler: not well.
+            </p>
           </div>
         </div>
       </section>

@@ -21,14 +21,18 @@
 var languages = new DynamicTagController({});
 languages.loadTags();
 
-var inputFilter = new DynamicTagController({
-  container: "input-container",
-  card: "input-card",
-  tag: "input-tag",
-  filter: "input-filter",
-  filterSelectionMethod: "input"
+var blogFilter = new DynamicTagController({
+  container: "blog-container",
+  card: "blog-post",
+  tag: "blog-tag",
+  filter: "blog-filter",
+  filterSelectionMethod: "input",
+  filterInputClass: "blog-filter-input",
+  filterInputPlaceholder: "Search for tags here...",
+  autocompleteClass: "blog-autocomplete",
+  activeTagClass: "viewing"
 });
-inputFilter.loadTags();
+blogFilter.loadTags();
 
 function getScrollPercent() {
   var h = document.documentElement,
