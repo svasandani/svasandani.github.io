@@ -331,8 +331,12 @@ section {
     position: relative;
     top: 0px;
   }
+  
+  .filter-input {
+	font-size: 1.2em;
+  }
 
-  .tag {
+  .tag, .input-tag {
     font-size: 1.6em;
     padding: 0.66em;
   }
