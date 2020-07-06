@@ -18,7 +18,21 @@
 //
 // dtc2.loadTags();
 
-var languages = new DynamicTagController({});
+// var languages = new DynamicTagController({});
+// languages.loadTags();
+
+var languages = new DynamicTagController({
+  filterSelector: "filter",
+  useDefaultStyling: "true",
+  styling: {
+    cssPath: "https://cdn.jsdelivr.net/gh/svasandani/dynamic-tags@master/css/dynamic-tags.css",
+    baseTheme: "blue",
+    filter: {
+      stickyFilter: "true",
+      top: "200px"
+    }
+  }
+});
 languages.loadTags();
 
 var blogFilter = new DynamicTagController({
