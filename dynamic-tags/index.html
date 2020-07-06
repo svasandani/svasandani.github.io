@@ -90,10 +90,16 @@
           </div>
         </div>
         <p>
-          Note that the styling isn't included as part of the library — yet. Style notwithstanding, this example took only two lines of JavaScript:
+          Note that the styling isn't included as part of the library — yet. Style notwithstanding, this example took only a few lines of JavaScript:
         </p>
         <pre><code>
-      var languages = new DynamicTagController({});
+      var languages = new DynamicTagController({
+        useDefaultStyling: "true",
+        styling: {
+          cssPath: "dynamic-tags/css/dynamic-tags.css",
+          baseTheme: "blue"
+        }
+      });
       languages.loadTags();
         </code></pre>
         <p>
@@ -158,11 +164,19 @@
           </div>
           <div class="param-row">
             <h5>useAutocomplete</h5>
-            <span>Determines whether to show an autocomplete box under the filter input if filterSelectionMethod is set to <code>input</code>; defaults to <code>filter-input</code></span>
+            <span>Determines whether to show an autocomplete box in the filter input if filterSelectionMethod is set to <code>input</code>; defaults to <code>true</code></span>
           </div>
           <div class="param-row">
             <h5>autocompleteClass</h5>
-            <span>Determines the class to assign to the auto-generated autocomplete element if useAutocomplete is set to <code>true</code> and filterSelectionMethod is set to <code>input</code>; defaults to <code>filter-input</code></span>
+            <span>Determines the class to assign to the auto-generated autocomplete element if useAutocomplete is set to <code>true</code> and filterSelectionMethod is set to <code>input</code>; defaults to <code>autocomplete</code></span>
+          </div>
+          <div class="param-row">
+            <h5>useSearchBox</h5>
+            <span>Determines whether to show a search box under the filter input if filterSelectionMethod is set to <code>input</code>; defaults to <code>true</code></span>
+          </div>
+          <div class="param-row">
+            <h5>searchBoxClass</h5>
+            <span>Determines the class to assign to the auto-generated search box element if useSearchBox is set to <code>true</code> and filterSelectionMethod is set to <code>input</code>; defaults to <code>search-box</code></span>
           </div>
           <h4>No Result options</h4>
           <div class="param-row">
@@ -191,7 +205,7 @@
         filterSelectionMethod: "input",
         filterInputClass: "blog-filter-input",
         filterInputPlaceholder: "Search for tags here...",
-        autocompleteClass: "blog-autocomplete",
+        searchBoxClass: "blog-search-box",
         activeTagClass: "viewing"
       }
     </code></pre>
@@ -259,7 +273,8 @@
       </section>
     </main>
   </body>
-  <script src="https://cdn.jsdelivr.net/gh/svasandani/dynamic-tags@e48218fffc16cbb5169c0d744b26f903ae27efc2/js/dynamic-tags.js"></script>
+  <!-- <script src="dynamic-tags/js/dynamic-tags.js"></script> -->
+  <script src="dynamic-tags/js/dynamic-tags.js"></script>
   <script src="script.js"></script>
 
 </html>

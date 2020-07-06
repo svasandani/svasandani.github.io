@@ -18,22 +18,34 @@
 //
 // dtc2.loadTags();
 
-// var languages = new DynamicTagController({});
-// languages.loadTags();
-
 var languages = new DynamicTagController({
-  filterSelector: "filter",
   useDefaultStyling: "true",
   styling: {
-    cssPath: "https://cdn.jsdelivr.net/gh/svasandani/dynamic-tags@e48218fffc16cbb5169c0d744b26f903ae27efc2/css/dynamic-tags.css",
-    baseTheme: "blue",
-    filter: {
-      stickyFilter: "true",
-      top: "200px"
-    }
+    cssPath: "dynamic-tags/css/dynamic-tags.css",
+    baseTheme: "blue"
   }
 });
 languages.loadTags();
+
+// var languages = new DynamicTagController({
+//   filterSelector: "filter",
+//   useDefaultStyling: "true",
+//   filterSelectionMethod: "input",
+//   useAutocomplete: "false",
+//   useSearchBox: "true",
+//   styling: {
+//     cssPath: "dynamic-tags/css/dynamic-tags.css",
+//     baseTheme: "blue",
+//     colors: {
+//       filterInputFocusColor: "#efefef"
+//     },
+//     filter: {
+//       stickyFilter: "true",
+//       top: "200px"
+//     }
+//   }
+// });
+// languages.loadTags();
 
 var blogFilter = new DynamicTagController({
   container: "blog-container",
@@ -43,7 +55,7 @@ var blogFilter = new DynamicTagController({
   filterSelectionMethod: "input",
   filterInputClass: "blog-filter-input",
   filterInputPlaceholder: "Search for tags here...",
-  autocompleteClass: "blog-autocomplete",
+  searchBoxClass: "blog-search-box",
   activeTagClass: "viewing"
 });
 blogFilter.loadTags();
