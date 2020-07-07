@@ -22,7 +22,11 @@ var languages = new DynamicTagController({
   useDefaultStyling: "true",
   styling: {
     cssPath: "dynamic-tags/css/dynamic-tags.css",
-    baseTheme: "blue"
+    baseTheme: "blue",
+    filter: {
+      stickyFilter: "true",
+      top: "130px"
+    }
   }
 });
 languages.loadTags();
