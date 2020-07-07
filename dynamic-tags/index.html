@@ -97,7 +97,11 @@
         useDefaultStyling: "true",
         styling: {
           cssPath: "dynamic-tags/css/dynamic-tags.css",
-          baseTheme: "blue"
+          baseTheme: "blue",
+          filter: {
+            stickyFilter: "desktop",
+            top: "130px"
+          }
         }
       });
       languages.loadTags();
@@ -127,10 +131,6 @@
           <div class="param-row">
             <h5>tag</h5>
             <span>Determines the class of the tag element; defaults to <code>tag</code></span>
-          </div>
-          <div class="param-row">
-            <h5>selectorExclusivity</h5>
-            <span>Determines whether to query the intersection or union of selectors passed in; defaults to <code>union</code></span>
           </div>
           <h4>Optional configuration</h4>
           <div class="param-row">

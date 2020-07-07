@@ -24,7 +24,7 @@ var languages = new DynamicTagController({
     cssPath: "dynamic-tags/css/dynamic-tags.css",
     baseTheme: "blue",
     filter: {
-      stickyFilter: "true",
+      stickyFilter: "desktop",
       top: "130px"
     }
   }
