@@ -35,7 +35,7 @@ languages.loadTags();
 //   filterSelector: "filter",
 //   useDefaultStyling: "true",
 //   filterSelectionMethod: "input",
-//   useAutocomplete: "false",
+//   useAutocomplete: "true",
 //   useSearchBox: "true",
 //   styling: {
 //     cssPath: "dynamic-tags/css/dynamic-tags.css",
