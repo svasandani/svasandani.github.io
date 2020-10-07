@@ -33,6 +33,16 @@
       </section>
       <section id="usage">
         <h2>Usage</h2>
+        <h3>Styling<span class="catchy">New!</span></h3>
+        <p>
+          <span class="corny">dynamic-tags</span> now comes with default styling for a truly drop-in experience! There are a whole host of parameters to change, but simply set the <code>useDefaultStyling</code> tag as true in your hash, and a <code>cssPath</code> key in a hash under <code>styling</code>. Check out the example below for what that might look like.
+        </p>
+        <p>
+          For more fine-grained control, add other parameters to the <code>styling</code> hash. From here, you can change things like the base color with <code>baseTheme</code>, and how the filter behaves - whether to be sticky, absolutely positioned, and how it behaves across different breakpoints.
+        </p>
+        <p>
+          Watch out for a detailed breakdown soon!
+        </p>
         <h3>Basic setup</h3>
         <p>
           <span class="corny">dynamic-tags</span> is designed to fit directly into your predefined HTML without much fuss. It expects that your DOM has a container for all your cards, and that all your cards have been loaded. It also expects that
@@ -90,7 +100,7 @@
           </div>
         </div>
         <p>
-          Note that the styling isn't included as part of the library — yet. Style notwithstanding, this example took only a few lines of JavaScript:
+          This example took only a few lines of JavaScript:
         </p>
         <pre><code>
       var languages = new DynamicTagController({
@@ -269,6 +279,7 @@
           </div>
         </div>
       </section>
+      
       <section id="contributing">
         <h2>Contributing</h2>
         <p>
