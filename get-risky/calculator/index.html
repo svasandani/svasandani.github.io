@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Risk Calculator</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Rubik:ital,wght@0,300;0,400;0,700;1,300;1,400;1,700&display=swap" rel="stylesheet">
+
+    <link href="/css/styles.css" rel="stylesheet">
+</head>
+<body>
+    <main>
+        <div class="heading">
+            <h1>Service Name</h1>
+            <a href="/services">Choose another service</a>
+        </div>
+        <h2>Risk Calculator</h2>
+        <div id="risk-calculator">
+            <div class="inputs">
+                <label>
+                    Target Availability
+                    <input id="downtime-percent" class="labelled-input" name="downtime-percent" type="number" min="0" max="100" step="0.001" placeholder="e.g. 99.999"/>
+                    <span class="percentage-input">%</span>
+                </label>
+                <label>
+                    Unacceptable risk level for individual risk (% error budget)
+                    <input id="unacceptable-threshold" class="labelled-input" name="unacceptable-threshold" type="number" min="0" max="100" step="0.001" placeholder="e.g. 15"/>
+                    <span class="percentage-input">%</span>
+                </label>
+            </div>
+            <div class="outputs">
+                <label>
+                    Budget (min/yr)
+                    <span id="budget-min" class="calculated">5.2596</span>
+                </label>
+                <label>
+                    Accepted (min/yr)
+                    <span id="accepted-min" class="calculated">0</span>
+                </label>
+                <label>
+                    Unallocated (min/yr)
+                    <span id="unallocated-min" class="calculated">5.2596</span>
+                </label>
+                <label>
+                    Individual risk threshold (min/yr)
+                    <span id="toobig-min" class="calculated">5.2596</span>
+                </label>
+            </div>
+        </div>
+        <h2>Risks</h2>
+        <div id="risks-table" class="table">
+            <div id="risks-table-head" class="table-head risks-table-row table-row">
+                <h3>Risk</h3>
+                <h3 class="table-center-data">More</h3>
+            </div>
+            <div id="risks-table-body">
+                <details class="table-hidden-row not-tolerable" data-risk="pods-down">
+                    <summary class="risks-table-row table-row">
+                        <span>Service pods down</span>
+                        <span class="table-center-data show-details">· · ·</span>
+                    </summary>
+                    <div class="risk-details">
+                        <label>
+                            Affected time (min/yr)
+                            <span id="pods-down-affected-min" class="calculated">5.2596</span>
+                        </label>
+                        <label>
+                            Tolerable?
+                            <span id="pods-down-tolerable" class="calculated no">No</span>
+                        </label>
+                        <label class="custom-checkbox">
+                            Accept this risk
+                            <input id="pods-down-accept" name="pods-down-accept" class="custom-checkbox" type="checkbox" disabled/>
+                            <span class="custom-checkbox"></span>
+                        </label>
+                    </div>
+                    <h4>Edit this risk</h4>
+                    <form class="risk-edit" data-risk="pods-down">
+                        <div class="inputs">
+                            <label>
+                                Risk ID
+                                <input id="pods-down-riskId" class="labelled-input" name="riskId" value="pods-down" placeholder=""/>
+                            </label>
+                            <label>
+                                Risk Description
+                                <input id="pods-down-riskDesc" class="labelled-input" name="riskDesc" value="Service pods down" placeholder=""/>
+                            </label>
+                            <label>
+                                <span>
+                                    ETTD
+                                    <span class="tooltip" data-tip="Estimated time to detect the risk">ⓘ</span>
+                                </span>
+                                <input id="pods-down-riskEttd" class="labelled-input" name="riskDesc" value="Service pods down" placeholder=""/>
+                            </label>
+                            <label>
+                                <span>
+                                    ETTR
+                                    <span class="tooltip" data-tip="Estimated time to recover from the risk">ⓘ</span>
+                                </span>
+                                <input id="pods-down-riskEttr" class="labelled-input" name="riskDesc" value="Service pods down" placeholder=""/>
+                            </label>
+                            <label>
+                                Impact (% users)
+                                <input id="pods-down-riskImpact" class="labelled-input" name="riskDesc" value="Service pods down" type="number" min="0" max="100" step="0.001" placeholder=""/>
+                                <span class="percentage-input">%</span>
+                            </label>
+                            <label>
+                                <span>
+                                    ETTF
+                                    <span class="tooltip" data-tip="Estimated time to fix the risk">ⓘ</span>
+                                </span>
+                                <input id="pods-down-riskEttf" class="labelled-input" name="riskDesc" value="Service pods down" placeholder=""/>
+                            </label>
+                        </div>
+                        <div class="buttons">
+                            <button type="submit" class="edit-btn">Edit</button>
+                            <button type="button" class="delete-btn">Delete</button>
+                        </div>
+                    </form>
+                </details>
+            </div>
+        </div>
+        <button class="modal-launcher" data-target="new-risk-modal">+ Create new risk</button>
+        <div class="spacer"></div>
+        <h2>Global risk factors</h2>
+        <div id="risk-factors-table" class="table">
+            <div id="risk-factors-table-head" class="table-head risk-factors-table-row table-row">
+                <h3>Risk Factor</h3>
+                <h3 class="table-center-data">More</h3>
+            </div>
+            <div id="risk-factors-table-body">
+                <details class="table-hidden-row" data-risk-factor="no-phone">
+                    <summary class="risk-factors-table-row table-row">
+                        <span>Engineers don't have cell phones</span>
+                        <span class="table-center-data show-details">· · ·</span>
+                    </summary>
+                    <h4>Edit this risk factor</h4>
+                    <form class="risk-factor-edit" data-risk-factor="no-phone">
+                        <div class="inputs">
+                            <label>
+                                Risk Factor ID
+                                <input id="no-phone-riskFactorId" class="labelled-input" name="riskFactorId" value="no-phone" placeholder=""/>
+                            </label>
+                            <label>
+                                Risk Description
+                                <input id="no-phone-riskDesc" class="labelled-input" name="riskDesc" value="Service pods down" placeholder=""/>
+                            </label>
+                            <label>
+                                <span>
+                                    ETTD
+                                    <span class="tooltip" data-tip="Estimated time to detect the risk">ⓘ</span>
+                                </span>
+                                <input id="no-phone-riskEttd" class="labelled-input" name="riskDesc" value="Service pods down" placeholder=""/>
+                            </label>
+                            <label>
+                                <span>
+                                    ETTR
+                                    <span class="tooltip" data-tip="Estimated time to recover from the risk">ⓘ</span>
+                                </span>
+                                <input id="no-phone-riskEttr" class="labelled-input" name="riskDesc" value="Service pods down" placeholder=""/>
+                            </label>
+                            <label>
+                                Impact (% users)
+                                <input id="no-phone-riskImpact" class="labelled-input" name="riskDesc" value="Service pods down" type="number" min="0" max="100" step="0.001" placeholder=""/>
+                                <span class="percentage-input">%</span>
+                            </label>
+                            <label>
+                                <span>
+                                    ETTF
+                                    <span class="tooltip" data-tip="Estimated time to fix the risk">ⓘ</span>
+                                </span>
+                                <input id="no-phone-riskEttf" class="labelled-input" name="riskDesc" value="Service pods down" placeholder=""/>
+                            </label>
+                        </div>
+                        <div class="buttons">
+                            <button type="submit" class="edit-btn">Edit</button>
+                            <button type="button" class="delete-btn">Delete</button>
+                        </div>
+                    </form>
+                </details>
+            </div>
+        </div>
+        <button class="modal-launcher" data-target="new-risk-factor-modal">+ Create new risk factor</button>
+    </main>
+    <div id="new-risk-modal" class="modal hidden">
+        <form id="new-risk-modal-form" class="modal-form">
+            <h2>Add a new risk</h2>
+            <label>
+                Risk ID
+                <input class="labelled-input" name="riskId" value="" placeholder=""/>
+            </label>
+            <label>
+                Risk Description
+                <input class="labelled-input" name="riskDesc" value="" placeholder=""/>
+            </label>
+            <label>
+                <span>
+                    ETTD
+                    <span class="tooltip" data-tip="Estimated time to detect the risk">ⓘ</span>
+                </span>
+                <input class="labelled-input" name="riskEttd" value="" type="number" placeholder=""/>
+            </label>
+            <label>
+                <span>
+                    ETTR
+                    <span class="tooltip" data-tip="Estimated time to recover from the risk">ⓘ</span>
+                </span>
+                <input class="labelled-input" name="riskEttr" value="" type="number" placeholder=""/>
+            </label>
+            <label>
+                Impact (% users)
+                <input class="labelled-input" name="riskImpact" value="" type="number" min="0" max="100" step="0.001" placeholder=""/>
+                <span class="percentage-input">%</span>
+            </label>
+            <label>
+                <span>
+                    ETTF
+                    <span class="tooltip" data-tip="Estimated time to fix the risk">ⓘ</span>
+                </span>
+                <input class="labelled-input" name="riskEttf" value="" type="number" placeholder=""/>
+            </label>
+            <button type="submit">Create</button>
+        </form>
+    </div>
+    <div id="new-risk-factor-modal" class="modal hidden">
+        <form id="new-risk-factor-modal-form" class="modal-form">
+            <h2>Add a new risk factor</h2>
+            <label>
+                Risk Factor ID
+                <input class="labelled-input" name="riskFactorId" value="" placeholder=""/>
+            </label>
+            <label>
+                Risk Factor Description
+                <input class="labelled-input" name="riskFactorDesc" value="" placeholder=""/>
+            </label>
+            <label>
+                <span>
+                    + ETTD
+                    <span class="tooltip" data-tip="Estimated additional time to detect the risk">ⓘ</span>
+                </span>
+                <input class="labelled-input" name="riskFactorEttd" value="" type="number" placeholder=""/>
+            </label>
+            <label>
+                <span>
+                    + ETTR
+                    <span class="tooltip" data-tip="Estimated additional time to recover from the risk">ⓘ</span>
+                </span>
+                <input class="labelled-input" name="riskFactorEttr" value="" type="number" placeholder=""/>
+            </label>
+            <label>
+                + Impact (% users)
+                <input class="labelled-input" name="riskFactorImpact" value="" type="number" min="0" max="100" step="0.001" placeholder=""/>
+                <span class="percentage-input">%</span>
+            </label>
+            <label>
+                <span>
+                    + ETTF
+                    <span class="tooltip" data-tip="Estimated additional time to fix TODO the risk">ⓘ</span>
+                </span>
+                <input class="labelled-input" name="riskFactorEttf" value="" type="number" placeholder=""/>
+            </label>
+            <button type="submit">Create</button>
+        </form>
+    </div>
+</body>
+
+<script src="/js/apicalls.js"></script>
+<script src="/js/calculations.js"></script>
+<script src="/js/calculator.js"></script>
+
+</html>

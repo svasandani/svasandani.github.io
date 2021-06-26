@@ -1,0 +1,497 @@
+*, *:before, *:after {
+    box-sizing: border-box;
+}
+
+:root {
+    --lightgrey: lightgrey;
+    --transparentgrey: #00000073;
+    --darktheme: rgb(1, 122, 78);
+    --bg: rgb(255, 253, 250);
+    --blue: rgb(39, 119, 165);
+    --red: rgb(158, 63, 60);
+}
+
+html {
+    font-family: 'Rubik', Arial, Helvetica, sans-serif;
+}
+
+body {
+    padding: 20vh 0;
+    background: var(--bg);
+}
+
+main {
+    width: 100%;
+    padding: 0 20vw;
+}
+
+h1 {
+    font-size: 3rem;
+    margin-bottom: 0;
+}
+
+.yes { color: var(--darktheme) }
+.no { color: var(--red) }
+
+.spacer {
+    width: 100%;
+    height: 4rem;
+}
+
+.table {
+    margin-bottom: 1.5rem;
+}
+
+.table * {
+    margin: 0;
+}
+
+.table-head {
+    font-weight: bold;
+}
+
+.table-head.table-row {
+    padding: 1.5rem 0;
+}
+
+.table-row {
+    border-bottom: 1px solid var(--lightgrey);
+}
+
+.table-row span {
+    padding: 1.5rem 0;
+}
+
+.table-row {
+    display: grid;
+    grid-template-columns: 1fr 8ch;
+}
+
+.table-row span:nth-child(1) {
+    text-overflow: ellipsis;
+    overflow: hidden;
+}
+
+.table-center-data {
+    margin: 0 auto;
+    white-space: nowrap;
+}
+
+.table-hidden-row summary span:nth-child(1):not(.hover-reveal):after {
+    opacity: 1;
+    font-weight: bold;
+    margin-left: 1ch;
+}
+
+.table-hidden-row.not-tolerable summary span:nth-child(1):after {
+    content: 'NOT TOLERABLE';
+    color: var(--red);
+}
+
+.table-hidden-row.tolerable summary span:nth-child(1):after {
+    content: 'TOLERABLE';
+    color: var(--darktheme);
+}
+
+.table-hidden-row.tolerated summary span:nth-child(1):after {
+    content: 'TOLERATED';
+    color: var(--blue);
+}
+
+@media  (max-width: 768px) {
+    .table-hidden-row summary span:nth-child(1):after {
+        display: none;
+        opacity: 0;
+    }
+
+    .table-hidden-row summary span:nth-child(1):before {
+        margin-right: 1ch;
+        font-weight: bold;
+    }
+
+    .table-hidden-row.not-tolerable summary span:nth-child(1):before {
+        content: '✕';
+        color: var(--red);
+    }
+    
+    .table-hidden-row.tolerable summary span:nth-child(1):before {
+        content: 'OK';
+        color: var(--darktheme);
+    }
+    
+    .table-hidden-row.tolerated summary span:nth-child(1):before {
+        content: '—';
+        color: var(--blue);
+    }
+}
+
+.table-hidden-row summary:hover {
+    cursor: pointer;
+}
+
+.table-hidden-row .hover-reveal:after {
+    content: attr(data-reveal);
+    opacity: 0;
+    transition: 0.1s ease-in;
+}
+
+.table-hidden-row .hover-reveal:hover:after {
+    content: attr(data-reveal);
+    opacity: 1;
+}
+
+.risk-details {
+    margin-top: 1.5rem;
+    display: flex;
+    flex-flow: row wrap;
+}
+
+.risk-details label {
+    margin-bottom: 1.5rem;
+    margin-right: 32px;
+    position: relative;
+}
+
+.risk-edit label {
+    position: relative;
+}
+
+.risk-factor-edit label {
+    position: relative;
+}
+
+.modal label {
+    position: relative;
+}
+
+.table-hidden-row h4 {
+    margin-top: 16px;
+}
+
+.table-hidden-row[data-service] h4 {
+    margin-top: calc(1.5rem + 16px);
+}
+
+.table-hidden-row form {
+    padding: 1.5rem 0;
+    display: flex;
+    flex-flow: column;
+    border-bottom: 1px solid var(--lightgrey);
+}
+
+.table-hidden-row form .inputs {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-gap: 16px;
+}
+
+label > input.labelled-input {
+    margin-top: 0.25rem;
+}
+
+.table-hidden-row form .buttons {
+    margin-top: 1.5rem;
+    text-align: right;
+}
+
+.table-hidden-row form .buttons button {
+    margin-left: 16px;
+}
+
+label {
+    display: flex;
+    flex-flow: column;
+    font-size: 0.75rem;
+}
+
+input {
+    font-family: 'Rubik', Arial, Helvetica, sans-serif;
+    padding: 0.75rem;
+    font-size: 1rem;
+    border-radius: 4px;
+    border: 1px solid var(--darktheme);
+    box-shadow: inset 0px 0px 0px 0px var(--darktheme);
+    transition: 0.1s ease-in;
+}
+
+input:focus, input:focus-visible {
+    outline: none;
+    box-shadow: inset 0px 0px 0px 2px var(--darktheme);
+}
+
+span.tooltip {
+    position: relative;
+}
+
+span.tooltip:hover {
+    cursor: pointer;
+}
+
+span.tooltip:after {
+    content: attr(data-tip);
+    position: absolute;
+    opacity: 0;
+    pointer-events: none;
+    top: calc(-1.75rem - 8px);
+    left: 50%;
+    transform: translateX(-50%);
+    background: white;
+    border: 1px solid var(--darktheme);
+    border-radius: 2px;
+    transition: 0.1s ease-in;
+    padding: 8px;
+    white-space: nowrap;
+    z-index: 100;
+}
+
+span.tooltip:hover:after {
+    opacity: 1;
+}
+
+label.custom-checkbox:hover {
+    cursor: pointer;
+}
+
+input.custom-checkbox {
+    position: absolute;
+    opacity: 0;
+    cursor: pointer;
+    height: 0;
+    width: 0;
+}
+
+span.custom-checkbox {
+    position: absolute;
+    bottom: 0.5rem;
+    left: 0;
+    height: 1.5rem;
+    width: 1.5rem;
+    background: white;
+    border-radius: 2px;
+    border: 1px solid var(--darktheme);
+    box-shadow: inset 0px 0px 0px 0px var(--darktheme);
+    transition: 0.1s ease-in;
+}
+
+label.custom-checkbox:hover span.custom-checkbox {
+    box-shadow: inset 0px 0px 0px 2px var(--darktheme);
+}
+
+label.custom-checkbox input.custom-checkbox[disabled] ~ span.custom-checkbox {
+    background: var(--lightgrey);
+    border: 1px solid var(--transparentgrey);
+}
+
+label.custom-checkbox:hover input.custom-checkbox[disabled] ~ span.custom-checkbox {
+    box-shadow: inset 0px 0px 0px 0px var(--darktheme);
+}
+
+label.custom-checkbox input.custom-checkbox ~ span.custom-checkbox:after {
+    content: '✕';
+    color: white;
+    opacity: 0;
+    transition: 0.1s ease-in;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translateX(-50%) translateY(-50%);
+    font-size: 1rem;
+}
+
+label.custom-checkbox input.custom-checkbox:checked ~ span.custom-checkbox {
+    background: var(--darktheme);
+}
+
+label.custom-checkbox input.custom-checkbox:checked ~ span.custom-checkbox:after {
+    opacity: 1
+}
+
+.percentage-input {
+    position: absolute;
+    right: 0.75rem;
+    bottom: 0.75rem;
+    font-size: 1rem;
+    pointer-events: none;
+}
+
+/* Chrome, Safari, Edge, Opera */
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+/* Firefox */
+input[type=number] {
+  -moz-appearance: textfield;
+}
+
+button {
+    font-family: 'Rubik', Arial, Helvetica, sans-serif;
+    background: white;
+    border-radius: 4px;
+    padding: 0.75rem 6ch;
+    border: 1px solid var(--darktheme);
+    transition: 0.1s ease-in;
+    font-weight: bold;
+}
+
+button.edit-btn {
+    color: var(--blue);
+}
+
+button.delete-btn {
+    color: var(--red);
+}
+
+button:hover {
+    cursor: pointer;
+    box-shadow: 0px 0px 0px 2px var(--darktheme);
+}
+
+button:focus {
+    outline: none;
+    box-shadow: 0px 0px 0px 2px var(--darktheme);
+}
+
+@media (max-width: 768px) {
+    span.custom-checkbox {
+        bottom: 0.4rem;
+    }
+
+    .table-hidden-row form .inputs {
+        grid-template-rows: auto;
+        grid-template-columns: auto;
+    }
+
+    .table-hidden-row form .buttons button {
+        width: 100%;
+        margin-top: 16px;
+        margin-left: 0;
+    }
+
+    span.tooltip:after {
+        min-width: 50vw;
+        white-space: unset;
+    }
+}
+
+.modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 100vh;
+    width: 100vw;
+    background: var(--transparentgrey);
+
+    display: grid;
+    align-items: center;
+    justify-content: center;
+}
+
+.modal.hidden {
+    display: none;
+}
+
+.close-modal {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    padding: 5px;
+    transition: 0.1s ease-in;
+}
+
+.close-modal:hover {
+    cursor: pointer;
+    color: var(--red);
+}
+
+.modal-form {
+    display: flex;
+    flex-flow: column nowrap;
+    
+    width: 40vw;
+    padding: 5vh 3rem;
+    padding-bottom: calc(5vh + 2rem);
+
+    background: var(--bg);
+    border-radius: 8px;
+}
+
+.modal-form label {
+    margin-bottom: 16px;
+}
+
+.modal-form button {
+    margin-top: 1.2rem;
+}
+
+@media (max-width: 768px) {
+    main {
+        padding: 0 5vw;
+    }
+
+    .modal-form {
+        width: 90vw;
+    }
+}
+
+.heading {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+}
+
+.heading a {
+    margin-bottom: 0.5rem;
+}
+
+#risk-calculator .inputs {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-gap: 16px;
+}
+
+#risk-calculator .outputs {
+    display: flex;
+    flex-flow: row wrap;
+}
+
+#risk-calculator label {
+    margin-bottom: 1.5rem;
+    margin-right: 32px;
+    position: relative;
+}
+
+#risk-calculator .inputs label {
+    margin-right: 0px;
+}
+
+#risk-calculator input {
+    margin-top: 0.25rem;
+}
+
+.calculated {
+    font-size: 2rem;
+}
+
+@media (max-width: 768px) {
+    main {
+        padding: 0 5vw;
+    }
+
+    .modal-form {
+        width: 90vw;
+    }
+
+    .heading {
+        flex-flow: column;
+        align-items: flex-start;
+    }
+
+    #risk-calculator .inputs {
+        grid-template-rows: auto;
+        grid-template-columns: auto;
+        grid-gap: 0px;
+    }
+}
