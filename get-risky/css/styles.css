@@ -99,6 +99,10 @@ h1 {
 }
 
 @media  (max-width: 768px) {
+    h1 {
+        font-size: 2.25rem;
+    }
+    
     .table-hidden-row summary span:nth-child(1):after {
         display: none;
         opacity: 0;
@@ -248,6 +252,10 @@ span.tooltip:hover:after {
     opacity: 1;
 }
 
+label.custom-checkbox {
+    padding-bottom: 2.25rem;
+}
+
 label.custom-checkbox:hover {
     cursor: pointer;
 }
@@ -294,7 +302,7 @@ label.custom-checkbox input.custom-checkbox ~ span.custom-checkbox:after {
     position: absolute;
     top: 50%;
     left: 50%;
-    transform: translateX(-50%) translateY(-50%);
+    transform: translateX(-50%) translateY(-53%);
     font-size: 1rem;
 }
 
@@ -408,18 +416,39 @@ button:focus {
 
 .modal-form {
     display: flex;
-    flex-flow: column nowrap;
+    flex-flow: row wrap;
     
     width: 40vw;
-    padding: 5vh 3rem;
-    padding-bottom: calc(5vh + 2rem);
+    padding: 5vh;
+    padding-top: calc(5vh + 1rem);
 
     background: var(--bg);
     border-radius: 8px;
+    
+    border: 1px solid var(--darktheme);
+    position: relative;
+}
+
+.modal-form h2 {
+    position: absolute;
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    margin-top: calc(-0.5em - 16px);
+    padding: 16px;
+    background: var(--bg);
+    border-radius: 4px;
+    border: 1px solid var(--darktheme);
+    white-space: nowrap;
 }
 
 .modal-form label {
     margin-bottom: 16px;
+    width: calc(50% - 8px);
+}
+
+.modal-form label:nth-child(2n) {
+    margin-right: 16px;
 }
 
 .modal-form button {
@@ -433,6 +462,29 @@ button:focus {
 
     .modal-form {
         width: 90vw;
+        flex-flow: column nowrap;    
+        max-height: 80vh;
+        padding-top: 5vh;
+        overflow-y: scroll;
+        overflow-x: hidden;
+    }
+
+    .modal-form label {
+        width: 100%;
+        margin-right: 0px;
+    }
+
+    .modal-form h2 {
+        position: relative;
+        top: unset;
+        left: unset;
+        margin-top: unset;
+        transform: unset;
+        padding: 0;
+        background: var(--bg);
+        border-radius: 4px;
+        border: none;
+        white-space: unset;
     }
 }
 
@@ -478,10 +530,6 @@ button:focus {
 @media (max-width: 768px) {
     main {
         padding: 0 5vw;
-    }
-
-    .modal-form {
-        width: 90vw;
     }
 
     .heading {
