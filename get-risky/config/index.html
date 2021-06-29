@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Configuration</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Rubik:ital,wght@0,300;0,400;0,700;1,300;1,400;1,700&display=swap" rel="stylesheet">
+
+    <link href="../css/styles.css" rel="stylesheet">
+</head>
+<body>
+    <main>
+        <div class="heading">
+            <h1>Configuring Service</h1>
+            <div class="heading-links">
+                <a href="../calculator/" rel="keep-params">Back to calculator</a>
+                <a href="../services/">Choose another service</a>
+            </div>
+        </div>
+        <div id="config-list">
+            <div class="table">
+                <div class="table-head config-table-row table-row">
+                    <h3>Property</h3>
+                    <h3 class="table-center-data">Enable</h3>
+                </div>
+                <div>
+                    <details class="table-hidden-row">
+                        <summary class="table-row">
+                            <span>We're loading config options now...</span>
+                        </summary>
+                    </details>
+                </div>
+            </div>
+        </div>
+    </main>
+    <div id="notifications">
+    </div>
+</body>
+
+<script src="../js/utils.js"></script>
+<script src="../js/apicalls.js"></script>
+<script src="../js/config.js"></script>
+
+</html>

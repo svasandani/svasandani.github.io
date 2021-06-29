@@ -1,5 +1,6 @@
 let currentServiceId = '';
 let currentServiceName = '';
+const config = {};
 
 function appendRisk(toPopulate, risk) {
     toPopulate.insertAdjacentHTML('beforeEnd',
@@ -10,26 +11,33 @@ function appendRisk(toPopulate, risk) {
             <span class="table-center-data show-details">· · ·</span>
         </summary>
         <div class="expanded-details">
-            <label>
+            <label${config.risk.incidents ? '' : ' class="invisible"'}>
                 <span>
                     Incidents per year
                     <span class="tooltip" data-tip="Without risk factors: ${risk._baseIncidents}">ⓘ</span>
                 </span>
                 <span id="${risk.riskId}-incidents" class="calculated">${risk.incidents}</span>
             </label>
-            <label>
+            <label${config.risk.affectedTime ? '' : ' class="invisible"'}>
                 <span>
                     Affected time (min/yr)
                     <span class="tooltip" data-tip="Without risk factors: ${risk._baseAffectedTime}">ⓘ</span>
                 </span>
                 <span id="${risk.riskId}-affected-min" class="calculated">${risk.affectedTime}</span>
             </label>
-            <label>
+            <label${config.risk.shareBudget ? '' : ' class="invisible"'}>
                 <span>
                     Share of total budget (%)
-                    <span class="tooltip" data-tip="Without risk factors: ${risk._baseShareOfTotalBudget}%">ⓘ</span>
+                    <span class="tooltip" data-tip="Without risk factors: ${risk._baseShareOfTotalBudget}${risk._baseShareOfTotalBudget === 'N/A' ? '' : '%'}">ⓘ</span>
                 </span>
-                <span id="${risk.riskId}-share-min" class="calculated">${risk.shareOfTotalBudget}%</span>
+                <span id="${risk.riskId}-share-min" class="calculated">${risk.shareOfTotalBudget}${risk.shareOfTotalBudget === 'N/A' ? '' : '%'}</span>
+            </label>
+            <label${config.risk.shareTolerated ? '' : ' class="invisible"'}>
+                <span>
+                    Share of tolerated (%)
+                    <span class="tooltip" data-tip="Without risk factors: ${risk._baseShareOfTolerated}${risk._baseShareOfTolerated === 'N/A' ? '' : '%'}">ⓘ</span>
+                </span>
+                <span id="${risk.riskId}-sharet-min" class="calculated">${risk.shareOfTolerated}${risk.shareOfTolerated === 'N/A' ? '' : '%'}</span>
             </label>
             <label>
                 ${
@@ -118,11 +126,13 @@ function appendRisk(toPopulate, risk) {
     toPopulate.querySelector(`details[data-risk="${risk.riskId}"] .delete-btn`).addEventListener('click', (e) => {
         e.preventDefault();
 
-        if (confirm(`Are you sure you want to delete ${risk.riskDesc}?`)) {
-            deleteRisk(currentServiceId, risk.riskId)
-                .then(() => deleteComputedRisk(risk.riskId))
-                .then(getAllRisks);
-        }
+        document.querySelector(`details[data-risk="${risk.riskId}"]`).parentElement.removeChild(document.querySelector(`details[data-risk="${risk.riskId}"]`));
+
+        updateComputedRisk(risk.riskId, { deleted: true })
+            .then(updateAllRisks)
+            .then(() => deleteRisk(currentServiceId, risk.riskId))
+            .then(() => deleteComputedRisk(risk.riskId))
+            .then(getAllRisks);
     })
 
     let editThisRisk = toPopulate.querySelector(`form.risk-edit[data-risk="${risk.riskId}"]`);
@@ -133,11 +143,9 @@ function appendRisk(toPopulate, risk) {
         let data = {};
         editFd.forEach((value, key) => data[key] = isNaN(value) ? value : parseFloat(value));
         
-        // if (confirm(`Are you sure you want to update ${risk.riskDesc}?`)) {
-            updateRisk(currentServiceId, risk.riskId, data)
-                .then(() => updateComputedRisk(risk.riskId, data))
-                .then(getAllRisks);
-        // }
+        updateRisk(currentServiceId, risk.riskId, data)
+            .then(() => updateComputedRisk(risk.riskId, data))
+            .then(getAllRisks);
     })
 
     return true;
@@ -152,7 +160,7 @@ function appendRiskFactor(toPopulate, riskFactor) {
             <span class="table-center-data show-details">· · ·</span>
         </summary>
         <div class="expanded-details">
-            <label>
+            <label${config.riskFactor.contribution ? '' : ' class="invisible"'}>
                 ${
                     riskFactor.contribution == 0
                     ? `Contribution (min/yr)`
@@ -165,7 +173,7 @@ function appendRiskFactor(toPopulate, riskFactor) {
                 }
                 <span id="${riskFactor.riskFactorId}-contribution" class="calculated">${riskFactor.contribution}</span>
             </label>
-            <label class="custom-toggle">
+            <label class="custom-toggle${config.riskFactor.enable ? '' : ' invisible'}">
                 Enable this risk factor
                 <input id="${riskFactor.riskFactorId}-enable" name="${riskFactor.riskFactorId}-enable" class="custom-toggle" type="checkbox" ${riskFactor.enabled ? 'checked' : ''}/>
                 <span class="custom-toggle"></span>
@@ -234,11 +242,14 @@ function appendRiskFactor(toPopulate, riskFactor) {
     toPopulate.querySelector(`details[data-risk-factor="${riskFactor.riskFactorId}"] .delete-btn`).addEventListener('click', (e) => {
         e.preventDefault();
 
-        if (confirm(`Are you sure you want to delete ${riskFactor.riskFactorDesc}?`)) {
-            deleteRiskFactor(currentServiceId, riskFactor.riskFactorId)
-                .then(() => deleteComputedRiskFactor(riskFactor.riskFactorId))
-                .then(getAllRiskFactors);
-        }
+        document.querySelector(`details[data-risk-factor="${riskFactor.riskFactorId}"]`).parentElement.removeChild(document.querySelector(`details[data-risk-factor="${riskFactor.riskFactorId}"]`));
+
+        updateComputedRiskFactor(riskFactor.riskFactorId, { deleted: true })
+            .then(updateAllRiskFactors)
+            .then(updateAllRisks)
+            .then(() => deleteRiskFactor(currentServiceId, riskFactor.riskFactorId))
+            .then(() => deleteComputedRiskFactor(riskFactor.riskFactorId))
+            .then(getAllRiskFactors);
     })
 
     let editThisRiskFactor = toPopulate.querySelector(`form.risk-factor-edit[data-risk-factor="${riskFactor.riskFactorId}"]`);
@@ -249,11 +260,9 @@ function appendRiskFactor(toPopulate, riskFactor) {
         let data = {};
         editFd.forEach((value, key) => data[key] = isNaN(value) ? value : parseFloat(value));
         
-        // if (confirm(`Are you sure you want to update ${risk.riskDesc}?`)) {
-            updateRiskFactor(currentServiceId, riskFactor.riskFactorId, data)
-                .then(() => updateComputedRiskFactor(riskFactor.riskFactorId, data))
-                .then(getAllRiskFactors);
-        // }
+        updateRiskFactor(currentServiceId, riskFactor.riskFactorId, data)
+            .then(() => updateComputedRiskFactor(riskFactor.riskFactorId, data))
+            .then(getAllRiskFactors);
     })
 
     return true;
@@ -261,12 +270,7 @@ function appendRiskFactor(toPopulate, riskFactor) {
 
 function getAllRisks() {
     return new Promise((resolve, reject) => {
-        currentServiceId = (new URLSearchParams(window.location.search)).get('service');
-
-        getServiceNameFromId(currentServiceId)
-            .then(name => currentServiceName = name)
-            .then(() => document.title = `${currentServiceName} — Risk Calculator`)
-            .then (() => getRisks(currentServiceId))
+        getRisks(currentServiceId)
             .then(data => {
                 let toPopulate = document.querySelector('#risks-table-body');
 
@@ -281,7 +285,7 @@ function getAllRisks() {
                 computedData.sort((a,b) => b.affectedTime - a.affectedTime);
 
                 computedData.forEach(risk => {
-                    appendRisk(toPopulate, risk);
+                    if(!risk.deleted) appendRisk(toPopulate, risk);
                 })
             })
             .then(resolve)
@@ -304,7 +308,7 @@ function getAllRiskFactors() {
                 let computedData = getAllComputedRiskFactors();
 
                 computedData.forEach(riskFactor => {
-                    appendRiskFactor(toPopulate, riskFactor);
+                    if(!riskFactor.deleted) appendRiskFactor(toPopulate, riskFactor);
                 })
             })
             .then(recalculate)
@@ -325,7 +329,8 @@ function updateAllRisks() {
         computedData.sort((a,b) => b.affectedTime - a.affectedTime);
 
         computedData.every(risk => {
-            return appendRisk(toPopulate, getComputedRisk(risk.riskId));
+            if(!risk.deleted) return appendRisk(toPopulate, getComputedRisk(risk.riskId));
+            else return true;
         })
 
         recalculate();
@@ -343,12 +348,20 @@ function updateAllRiskFactors() {
         let computedData = getAllComputedRiskFactors();
 
         computedData.every(riskFactor => {
-            return appendRiskFactor(toPopulate, riskFactor);
+            if (!riskFactor.deleted) return appendRiskFactor(toPopulate, riskFactor);
+            else return true;
         })
 
         recalculate();
 
         resolve();
+    })
+}
+
+function parseConfig(cfg) {
+    cfg.forEach(c => {
+        if (!(c.configCategory in config)) config[c.configCategory] = {};
+        config[c.configCategory][c.configId] = c.configValue
     })
 }
 
@@ -368,6 +381,10 @@ function setUpCalculator() {
             .then(updateAllRisks)
             .then(updateAllRiskFactors);
     })
+    
+    for (const [id, display] of Object.entries(config.global)) {
+        if (!display) document.querySelector(`#${id}-container`).classList.add('invisible');
+    }
 }
 
 function setUpModals() {
@@ -428,7 +445,14 @@ function setUpSynchronous() {
 }
 
 window.addEventListener('load', () => {
-    getAllRisks()
+    currentServiceId = (new URLSearchParams(window.location.search)).get('service');
+
+    getServiceNameFromId(currentServiceId)
+        .then(name => currentServiceName = name)
+        .then(() => document.title = `${currentServiceName} — Risk Calculator`)
+        .then(() => getConfig(currentServiceId))
+        .then(parseConfig)
+        .then(getAllRisks)
         .then(getAllRiskFactors)
         .then(setUpSynchronous)
         .catch(err => console.log(err));

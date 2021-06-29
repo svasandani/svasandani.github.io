@@ -25,9 +25,21 @@ main {
     padding: 0 20vw;
 }
 
+.invisible {
+    display: none;
+}
+
 h1 {
     font-size: 3rem;
-    margin-bottom: 0;
+    margin: 0;
+}
+
+h2 {
+    margin-top: 3rem;
+}
+
+a {
+    color: var(--darktheme);
 }
 
 .yes { color: var(--darktheme) }
@@ -58,8 +70,12 @@ h1 {
     border-bottom: 1px solid var(--lightgrey);
 }
 
-.table-row span {
+.table-row span:not(.custom-toggle) {
     padding: 1.5rem 0;
+}
+
+.services-table-row span:not(.custom-toggle) {
+    padding: 1.5rem;
 }
 
 .table-row {
@@ -103,7 +119,7 @@ h1 {
     color: var(--blue);
 }
 
-@media  (max-width: 768px) {
+@media  (max-width: 1000px) {
     h1 {
         font-size: 2.25rem;
     }
@@ -138,15 +154,32 @@ h1 {
     cursor: pointer;
 }
 
-.table-hidden-row .hover-reveal:after {
-    content: attr(data-reveal);
-    opacity: 0;
-    transition: 0.1s ease-in;
+.table-hidden-row .hover-reveal {
+    position: relative;
 }
 
-.table-hidden-row .hover-reveal:hover:after {
+.table-hidden-row .hover-reveal:before {
     content: attr(data-reveal);
+    position: absolute;
+    width: calc(100% - 8px);
+    height: calc(100% - 8px);
+    left: 4px;
+    bottom: 4px;
+    border-radius: 4px;
+    border: 1px solid var(--darktheme);
     opacity: 1;
+    background: white;
+    z-index: -1;
+    transition: 0.1s ease-in;
+    display: flex;
+    flex-flow: row-reverse;
+    align-items: center;
+    padding-right: 1.5rem;
+    color: var(--darktheme);
+}
+
+.table-hidden-row .hover-reveal:hover:before {
+    box-shadow: 0px 0px 0px 2px var(--darktheme);
 }
 
 .expanded-details {
@@ -257,7 +290,21 @@ span.tooltip:hover:after {
     opacity: 1;
 }
 
+.config-table-row label.custom-toggle {
+    padding-bottom: 0;
+    display: grid;
+    align-items: center;
+    justify-content: center;
+}
+
+.config-table-row span.custom-toggle {
+    position: relative;
+    left: unset;
+    bottom: unset;
+}
+
 label.custom-toggle {
+    position: relative;
     padding-bottom: 2rem;
 }
 
@@ -422,7 +469,7 @@ button:focus {
     box-shadow: 0px 0px 0px 2px var(--darktheme);
 }
 
-@media (max-width: 768px) {
+@media (max-width: 1000px) {
     span.custom-checkbox {
         bottom: 0.4rem;
     }
@@ -439,7 +486,7 @@ button:focus {
     }
 
     span.tooltip:after {
-        min-width: 50vw;
+        min-width: 30vw;
         white-space: unset;
     }
 }
@@ -515,9 +562,9 @@ button:focus {
     margin-top: 1.2rem;
 }
 
-@media (max-width: 768px) {
+@media (max-width: 1000px) {
     main {
-        padding: 0 5vw;
+        padding: 0 2.5vw;
     }
 
     .modal-form {
@@ -551,11 +598,30 @@ button:focus {
 .heading {
     display: flex;
     justify-content: space-between;
-    align-items: flex-end;
+    align-items: center;
 }
 
 .heading a {
     margin-bottom: 0.5rem;
+    padding: 0.5rem 1rem;
+    border: 1px solid var(--darktheme);
+    border-radius: 4px;
+    color: black;
+    text-decoration: none;
+    background: white;
+    transition: 0.1s ease-in;
+    text-align: center;
+    white-space: nowrap;
+}
+
+.heading a:hover {
+    box-shadow: 0px 0px 0px 2px var(--darktheme);
+}
+
+.heading-links {
+    display: flex;
+    flex-flow: column nowrap;
+    padding-top: 0.5rem;
 }
 
 #risk-calculator .inputs {
@@ -575,6 +641,10 @@ button:focus {
     position: relative;
 }
 
+#risk-calculator label span:nth-child(1) {
+    flex-grow: 1;
+}
+
 #risk-calculator .inputs label {
     margin-right: 0px;
 }
@@ -587,19 +657,73 @@ button:focus {
     font-size: 2rem;
 }
 
-@media (max-width: 768px) {
-    main {
-        padding: 0 5vw;
-    }
-
+@media (max-width: 1000px) {
     .heading {
         flex-flow: column;
         align-items: flex-start;
+    }
+
+    .heading-links {
+        flex-flow: row wrap;
+    }
+
+    .heading a {
+        margin-right: 0.5rem;
     }
 
     #risk-calculator .inputs {
         grid-template-rows: auto;
         grid-template-columns: auto;
         grid-gap: 0px;
+    }
+}
+
+.config-table-row {
+    position: relative;
+}
+
+.border-bottom {
+    border-bottom: 1px solid var(--lightgrey);
+}
+
+.expanded-details.border-bottom {
+    padding-bottom: 1.5rem;
+}
+
+#notifications {
+    width: 20vw;
+    position: fixed;
+    left: 5vw;
+    bottom: 5vw;
+    display: flex;
+    flex-flow: column nowrap;
+}
+
+.notification {
+    background: white;
+    border: 1px solid var(--darktheme);
+    border-radius: 8px;
+    margin-bottom: 16px;
+    width: 100%;
+    padding: 16px;
+    transition: 0.1s ease-in;
+    opacity: 1;
+}
+
+.notification.hidden {
+    opacity: 0;
+    transition: 0.1s ease-in;
+}
+
+.notification:hover {
+    cursor: pointer;
+    box-shadow: 0px 0px 0px 4px var(--darktheme);
+}
+
+@media (max-width: 1000px) {
+    #notifications {
+        width: 90vw;
+        left: 5vw;
+        bottom: 5vw;
     }
 }
